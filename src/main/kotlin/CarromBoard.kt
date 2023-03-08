@@ -3,18 +3,16 @@ class CarromBoard {
     private val totalRedCoins = RED_COINS_ON_BOARD
     private var blackCoinsOnBoard = totalBlackCoins
     private var redCoinsOnBoard = totalRedCoins
-    private var totalBlackCoinsInGame = totalBlackCoins
-    private var totalRedCoinsInGame = totalRedCoins
 
     fun reduceBlackCoinsOnBoard(coinsTobeReduced: Int) {
         blackCoinsOnBoard -= coinsTobeReduced
     }
 
-    fun reduceCoinInGame(coinType: CoinType) {
+    fun reduceCoinOnBoard(coinType: CoinType) {
         if (coinType == CoinType.BLACK) {
-            totalBlackCoinsInGame -= 1
+            blackCoinsOnBoard -= 1
         } else if (coinType == CoinType.RED) {
-            totalRedCoinsInGame -= 1
+            redCoinsOnBoard -= 1
         }
     }
 
@@ -25,11 +23,11 @@ class CarromBoard {
         return false
     }
 
-    fun getBlackCoinsInGame(): Int {
-        return totalBlackCoinsInGame
+    fun getBlackCoinsOnBoard(): Int {
+        return blackCoinsOnBoard
     }
 
-    fun getRedCoinsInGame(): Int {
-        return totalRedCoinsInGame
+    fun getRedCoinsOnBoard(): Int {
+        return redCoinsOnBoard
     }
 }

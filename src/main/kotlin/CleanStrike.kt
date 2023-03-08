@@ -1,6 +1,6 @@
 class CleanStrike(
     private val players: List<Player>,
-    val carromBoard: CarromBoard,
+    private val carromBoard: CarromBoard,
     private val gameManager: GameManager
 ) {
     private var gameStatus = GameStatus.NOT_STARTED

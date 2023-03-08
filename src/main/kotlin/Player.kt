@@ -52,4 +52,8 @@ class Player(val name: String) {
         return fouls
     }
 
+    fun resetFouls() {
+        fouls = 0
+    }
+
 }

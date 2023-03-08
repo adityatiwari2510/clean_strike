@@ -4,7 +4,7 @@ enum class Outcomes(val displayName: String) {
             val currentPlayer = outcomeExecuteRequest.player
             val carromBoard = outcomeExecuteRequest.carromBoard
 
-            if (carromBoard.getBlackCoinsInGame() > 0) {
+            if (carromBoard.getBlackCoinsOnBoard() > 0) {
                 currentPlayer.increasePoints(GAIN_POINTS_FOR_STRIKE)
                 currentPlayer.resetSuccessivePocketMiss()
 
@@ -12,7 +12,7 @@ enum class Outcomes(val displayName: String) {
                 return true
             }
 
-            println("Black coins are not available on board.")
+            println("Oops!! Black coins are not enough to play this outcome.")
             return false
         }
     },
@@ -21,7 +21,7 @@ enum class Outcomes(val displayName: String) {
             val currentPlayer = outcomeExecuteRequest.player
             val carromBoard = outcomeExecuteRequest.carromBoard
 
-            if (carromBoard.getBlackCoinsInGame() > 1) {
+            if (carromBoard.getBlackCoinsOnBoard() > 1) {
                 currentPlayer.increasePoints(GAIN_POINTS_FOR_MULTISTRIKE)
                 currentPlayer.resetSuccessivePocketMiss()
 
@@ -38,7 +38,7 @@ enum class Outcomes(val displayName: String) {
             val currentPlayer = outcomeExecuteRequest.player
             val carromBoard = outcomeExecuteRequest.carromBoard
 
-            if (carromBoard.getRedCoinsInGame() > 0) {
+            if (carromBoard.getRedCoinsOnBoard() > 0) {
                 currentPlayer.increasePoints(GAIN_POINTS_FOR_RED_STRIKE)
                 currentPlayer.resetSuccessivePocketMiss()
                 return true
@@ -64,17 +64,17 @@ enum class Outcomes(val displayName: String) {
             val currentPlayer = outcomeExecuteRequest.player
             val carromBoard = outcomeExecuteRequest.carromBoard
 
-            if (coinType == CoinType.BLACK && carromBoard.getBlackCoinsInGame() == 0) {
+            if (coinType == CoinType.BLACK && carromBoard.getBlackCoinsOnBoard() == 0) {
                 println("Oops!! Black coins are not enough to play this outcome.")
                 return false
-            } else if (coinType == CoinType.RED && carromBoard.getRedCoinsInGame() == 0) {
+            } else if (coinType == CoinType.RED && carromBoard.getRedCoinsOnBoard() == 0) {
                 println("Oops!! Red coins are not enough to play this outcome.")
                 return false
             } else {
                 executePocketMiss(currentPlayer)
                 executeFoulMiss(currentPlayer)
                 currentPlayer.decreasePoints(POINTS_LOSE_FOR_DEFUNCT_COIN)
-                carromBoard.reduceCoinInGame(coinType)
+                carromBoard.reduceCoinOnBoard(coinType)
                 return true
             }
         }
@@ -102,7 +102,7 @@ enum class Outcomes(val displayName: String) {
         player.updateFouls()
         if (player.getFouls() == MAX_FOULS_ALLOWED) {
             player.decreasePoints(ADDITIONAL_POINTS_LOSE_FOR_FOUL)
-            player.resetSuccessivePocketMiss()
+            player.resetFouls()
         }
     }
 }
