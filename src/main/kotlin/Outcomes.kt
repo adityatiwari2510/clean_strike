@@ -81,7 +81,10 @@ enum class Outcomes(val displayName: String) {
     },
     NONE("None") {
         override fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean {
-            TODO("Not yet implemented")
+            val currentPlayer = outcomeExecuteRequest.player
+
+            executePocketMiss(currentPlayer)
+            return true
         }
     };
 
