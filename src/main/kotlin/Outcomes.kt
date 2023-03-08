@@ -1,7 +1,19 @@
 enum class Outcomes(val displayName: String) {
     STRIKE("Strike") {
         override fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean {
-            TODO("Not yet implemented")
+            val currentPlayer = outcomeExecuteRequest.player
+            val carromBoard = outcomeExecuteRequest.carromBoard
+
+            if (carromBoard.getBlackCoinsInGame() > 0) {
+                currentPlayer.increasePoints(GAIN_POINTS_FOR_STRIKE)
+                currentPlayer.resetSuccessivePocketMiss()
+
+                carromBoard.reduceBlackCoinsOnBoard(BOARD_COINS_REDUCED_FOR_STRIKE)
+                return true
+            }
+
+            println("Black coins are not available on board.")
+            return false
         }
     },
     MULTI_STRIKE("Multistrike") {

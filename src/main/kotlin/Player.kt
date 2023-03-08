@@ -1,6 +1,8 @@
 class Player(val name: String) {
     private var points = INITIAL_POINTS_WITH_PLAYER
     private var isPlaying: Boolean = false
+    private var fouls: Int = 0
+    private var succesivePocketMiss = 0
 
     fun increasePoints(noOfPointsToBeIncreased: Int) {
         points += noOfPointsToBeIncreased
@@ -28,6 +30,10 @@ class Player(val name: String) {
 
     fun getGamePoints(): Int {
         return points
+    }
+
+    fun resetSuccessivePocketMiss() {
+        succesivePocketMiss = 0
     }
 
 }
