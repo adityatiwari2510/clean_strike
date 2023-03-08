@@ -1,2 +1,4 @@
-enum class CoinType {
+enum class CoinType(val displayName: String) {
+    BLACK("Black"),
+    RED("Red")
 }

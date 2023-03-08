@@ -1,0 +1,1 @@
+class OutcomeExecuteRequest (val player: Player, val carromBoard: CarromBoard, val coinType: CoinType)

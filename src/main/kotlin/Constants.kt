@@ -1,1 +1,16 @@
 public const val INITIAL_POINTS_WITH_PLAYER = 0
+public const val GAIN_POINTS_FOR_STRIKE = 1
+public const val GAIN_POINTS_FOR_MULTISTRIKE = 2
+public const val GAIN_POINTS_FOR_RED_STRIKE = 3
+public const val POINTS_LOSE_FOR_STRIKER_STRIKE = 0
+public const val POINTS_LOSE_FOR_DEFUNCT_COIN = 0
+public const val POINTS_LOSE_FOR_NOT_POCKETING_COIN = 1
+public const val MAX_CHANCE_FOR_NOT_POCKETING_COIN = 3
+public const val ADDITIONAL_POINTS_LOSE_FOR_FOUL = 1
+public const val MAX_FOULS_ALLOWED = 3
+public const val BOARD_COINS_REDUCED_FOR_STRIKE = 1
+public const val BLACK_COINS_ON_BOARD = 9
+public const val RED_COINS_ON_BOARD = 1
+public const val MINIMUM_GAME_POINTS_FOR_HIGHEST_SCORE_PLAYER = 5
+public const val MINIMUM_LEAD_POINTS_FOR_HIGHEST_SCORE_PLAYER = 3
+public const val BOARD_COINS_REDUCED_FOR_MULTISTRIKE = 2
