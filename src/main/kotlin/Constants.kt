@@ -1,0 +1,1 @@
+public const val INITIAL_POINTS_WITH_PLAYER = 0
