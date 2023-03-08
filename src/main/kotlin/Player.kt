@@ -36,4 +36,20 @@ class Player(val name: String) {
         succesivePocketMiss = 0
     }
 
+    fun updatePocketMiss() {
+        succesivePocketMiss += 1
+    }
+
+    fun getSuccesivePocketMiss(): Int {
+        return succesivePocketMiss
+    }
+
+    fun updateFouls() {
+        fouls += 1
+    }
+
+    fun getFouls(): Int {
+        return fouls
+    }
+
 }

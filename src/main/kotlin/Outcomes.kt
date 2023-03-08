@@ -43,14 +43,19 @@ enum class Outcomes(val displayName: String) {
                 currentPlayer.resetSuccessivePocketMiss()
                 return true
             }
-            
+
             println("Oops!! Red coins are not enough to play this outcome.")
             return false
         }
     },
     STRIKER_STRIKE("Striker strike") {
         override fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean {
-            TODO("Not yet implemented")
+            val currentPlayer = outcomeExecuteRequest.player
+
+            executePocketMiss(currentPlayer)
+            executeFoulMiss(currentPlayer)
+            currentPlayer.decreasePoints(POINTS_LOSE_FOR_STRIKER_STRIKE)
+            return true
         }
     },
     DEFUNCT_COIN("Defunct coin") {
@@ -65,4 +70,20 @@ enum class Outcomes(val displayName: String) {
     };
 
     abstract fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean
+
+    fun executePocketMiss(player: Player) {
+        player.updatePocketMiss()
+        if (player.getSuccesivePocketMiss() == MAX_CHANCE_FOR_NOT_POCKETING_COIN) {
+            player.decreasePoints(POINTS_LOSE_FOR_NOT_POCKETING_COIN)
+            player.resetSuccessivePocketMiss()
+        }
+    }
+
+    fun executeFoulMiss(player: Player) {
+        player.updateFouls()
+        if (player.getFouls() == MAX_FOULS_ALLOWED) {
+            player.decreasePoints(ADDITIONAL_POINTS_LOSE_FOR_FOUL)
+            player.resetSuccessivePocketMiss()
+        }
+    }
 }
