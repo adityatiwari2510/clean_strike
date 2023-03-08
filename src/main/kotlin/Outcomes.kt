@@ -60,7 +60,23 @@ enum class Outcomes(val displayName: String) {
     },
     DEFUNCT_COIN("Defunct coin") {
         override fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean {
-            TODO("Not yet implemented")
+            val coinType = outcomeExecuteRequest.coinType
+            val currentPlayer = outcomeExecuteRequest.player
+            val carromBoard = outcomeExecuteRequest.carromBoard
+
+            if (coinType == CoinType.BLACK && carromBoard.getBlackCoinsInGame() == 0) {
+                println("Oops!! Black coins are not enough to play this outcome.")
+                return false
+            } else if (coinType == CoinType.RED && carromBoard.getRedCoinsInGame() == 0) {
+                println("Oops!! Red coins are not enough to play this outcome.")
+                return false
+            } else {
+                executePocketMiss(currentPlayer)
+                executeFoulMiss(currentPlayer)
+                currentPlayer.decreasePoints(POINTS_LOSE_FOR_DEFUNCT_COIN)
+                carromBoard.reduceCoinInGame(coinType)
+                return true
+            }
         }
     },
     NONE("None") {
