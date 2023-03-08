@@ -28,14 +28,24 @@ enum class Outcomes(val displayName: String) {
                 carromBoard.reduceBlackCoinsOnBoard(BOARD_COINS_REDUCED_FOR_MULTISTRIKE)
                 return true
             }
-            
+
             println("Oops!! Black coins are not enough to play this outcome.")
             return false
         }
     },
     RED_STRIKE("Red strike") {
         override fun execute(outcomeExecuteRequest: OutcomeExecuteRequest): Boolean {
-            TODO("Not yet implemented")
+            val currentPlayer = outcomeExecuteRequest.player
+            val carromBoard = outcomeExecuteRequest.carromBoard
+
+            if (carromBoard.getRedCoinsInGame() > 0) {
+                currentPlayer.increasePoints(GAIN_POINTS_FOR_RED_STRIKE)
+                currentPlayer.resetSuccessivePocketMiss()
+                return true
+            }
+            
+            println("Oops!! Red coins are not enough to play this outcome.")
+            return false
         }
     },
     STRIKER_STRIKE("Striker strike") {
