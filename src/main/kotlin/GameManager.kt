@@ -12,7 +12,7 @@ class GameManager {
                 print(consolePromptMessage)
                 consoleResponse = readlnOrNull()?.toInt()!!
 
-                if (consoleResponse > outcomes.size) {
+                if (consoleResponse <= 0 || consoleResponse > outcomes.size) {
                     println("Invalid outcome.")
                 }
             } catch (exception: NumberFormatException) {
